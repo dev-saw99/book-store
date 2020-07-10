@@ -1,5 +1,6 @@
 import React from 'react'
-import { Form, Button,Col,Card } from 'react-bootstrap'
+import axios from 'axios'
+import {Card } from 'react-bootstrap'
 
 class InventoryForm extends React.Component{
     constructor(props){
@@ -14,6 +15,7 @@ class InventoryForm extends React.Component{
             }
         
         this.handleInputChange = this.handleInputChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
       
     }
     handleInputChange(event){
@@ -21,60 +23,55 @@ class InventoryForm extends React.Component{
         let tname = target.name
         let tvalue = target.value
         
-        this.setState({
-            
+        this.setState({      
                 [tname] : tvalue
-            
         })
        console.warn(this.state)
     }
     handleSubmit(event){
-        event.preventDefault()
+        let name = {
+                "bookname":this.state.bookname,
+                "author":this.state.author,
+                "price":Number(this.state.price),
+                "quantity":Number(this.state.quantity),
+                "isbn":this.state.isbn
+        }
+        name = JSON.stringify(name)
+        axios.post("http://localhost:8080/api/books",name)
+        .then(response=>{
+            console.log(response.status)
+            console.log(response.data)
+        })
     }
     
     render(){
         return (
-            <Card className="mx-auto p-4 shadow bg-white"  >
+            <Card className="mx-auto mt-4 p-4 shadow bg-white"  >
                 <Card.Title>Add/Update book</Card.Title>
                 <hr/>
-                <Form onSubmit={this.handleSubmit}>
-                    <Form.Group controlId="bookname">
-                        <Form.Label>
-                            Book Name
-                        </Form.Label>
-                        <Form.Control type="text" name="bookname" placeholder="Go in Action" onChange={this.handleInputChange}/>
-                    </Form.Group>
-                    <Form.Group controlId="isbn">
-                        <Form.Label>
-                            ISBN
-                        </Form.Label>
-                        <Form.Control type="text" name="isbn" placeholder="9123234541243" onChange={this.handleInputChange}/>
-                    </Form.Group>
-                    <Form.Group controlId="Author">
-                        <Form.Label>
-                            Author's Name
-                        </Form.Label>
-                        <Form.Control type="text" name="author" placeholder="William Kennedy" onChange={this.handleInputChange}/>
-                    </Form.Group>
-                    <Form.Row>
-                    <Form.Group as={Col} controlId="Quantity">
-                        <Form.Label>
-                            Quantity
-                        </Form.Label>
-                        <Form.Control type="number" name="quantity" placeholder="1" onChange={this.handleInputChange}/>
-                    </Form.Group>
-                    <Form.Group as={Col} controlId="Price">
-                        <Form.Label>
-                            Price
-                        </Form.Label>
-                        <Form.Control type="number"name="price" placeholder="199.00" onChange={this.handleInputChange}/>
-                    </Form.Group>
-                    </Form.Row>
-                    <Form.Group  controlID="submitForm">
-                        <Button type="submit" variant="dark">Submit</Button>
-                    </Form.Group>
-                    
-                </Form>
+                <form onSubmit={this.handleSubmit}>
+                    <div className="form-group">
+                        <label>Book Name</label>
+                        <input type="text" className="form-control" name="bookname" onChange={this.handleInputChange}/>
+                    </div>
+                    <div className="form-group">
+                        <label>ISBN</label>
+                        <input type="text" className="form-control" name="isbn"  onChange={this.handleInputChange}/>    
+                    </div>
+                    <div className="form-group">
+                        <label>Author</label>
+                        <input type="text" className="form-control" name="author"  onChange={this.handleInputChange}/>    
+                    </div>
+                    <div className="form-group">
+                        <label>Price</label>
+                        <input type="number"className="form-control" name="price"  onChange={this.handleInputChange}/>
+                    </div>
+                    <div className="form-group">
+                        <label>Quantity</label>
+                        <input type="numbers"className="form-control" name="quantity"  onChange={this.handleInputChange}/>
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2 btn-dark">Submit</button>
+                </form>
             </Card>
         )
     }

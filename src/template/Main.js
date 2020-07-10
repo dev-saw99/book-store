@@ -2,8 +2,6 @@ import React from 'react'
 import  {Container,Row,Col}  from 'react-bootstrap'
 import IOContainer from './IOContainer'
 
-
-
 class MainTemplate extends React.Component{
     state = {
         books: {}
@@ -16,6 +14,8 @@ class MainTemplate extends React.Component{
           this.setState({books:data})
         })
         .catch(console.log)
+        
+        
     }
     
     render(){

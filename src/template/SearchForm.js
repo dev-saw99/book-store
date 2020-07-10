@@ -1,32 +1,20 @@
 import React from 'react'
-import { Form,Row, Button,Col} from 'react-bootstrap'
 
 class SearchForm extends React.Component{
-    state = {
-        query:""
-    }
 
     render() {
     
         return (
-            <div className="mr-5 mb-3">
-            <Row>
-                <Col sm={10}>
-                    <Form >
-                    <Row>
-                        <Col sl={10}>
-                        <Form.Control type="text" placeholder="Search books ..."/>
-                        </Col>
-                        <Col sm={2}>
-                        <Button type="submit" variant="primary" className="mx-5">Search</Button>
-                        </Col>
-                    </Row>
-                    </Form>
-                </Col>
-                <Col sm={2}>
-                <Button type="submit" variant="primary" className="mx-5">Reset</Button>
-                </Col>
-            </Row>
+            <div className="form-row my-3">
+                <div className="col-8">
+                    <input type="text" class="form-control" placeholder="Search" name="query"/>
+                </div>
+                <div className="col">
+                    <input type="button" class="form-control btn-dark" value="submit"/>
+                </div>
+                <div className="col">
+                    <input type="button" class="form-control btn-dark" value="reset"/>
+                </div>
             </div>
         )
     

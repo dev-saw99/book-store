@@ -86,9 +86,11 @@ func searchBooks(w http.ResponseWriter, r *http.Request) {
 func addUpdateBooks(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000/")
 	w.Header().Set("Content-type", "application/json")
+
 	var b Book
 	err := json.NewDecoder(r.Body).Decode(&b)
 	if err != nil {
+		log.Println("Error occured")
 		log.Fatal(err)
 	}
 	if _, ok := Data[b.Isbn]; ok {

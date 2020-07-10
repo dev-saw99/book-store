@@ -8,41 +8,25 @@ class SellingForm extends React.Component{
             <Card className="mx-auto p-4 shadow bg-white" >
                 <Card.Title>Sell Book</Card.Title>
                 <hr/>
-                <Form>
-                    <Form.Group controlId="buyerName">
-                        <Form.Label>
-                            Buyer's Name
-                        </Form.Label>
-                        <Form.Control type="text" placeholder="Mr. Sonu Kumar Saw"/>
-                    </Form.Group>
-                    <Form.Group controlId="isbn">
-                        <Form.Label>
-                            ISBN
-                        </Form.Label>
-                        <Form.Control type="text" placeholder="9123234541243"/>
-                    </Form.Group>
-                    <Form.Group controlId="bookname">
-                        <Form.Label>
-                            Book Name
-                        </Form.Label>
-                        <Form.Control type="text" placeholder="Go in Action"/>
-                    </Form.Group>
-                    <Form.Row>
-                    <Form.Group as={Col} controlId="Quantity">    
-                        <Form.Control as="select" defaultValue="0" >
-                            <option value="0">Qnt</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </Form.Control>
-                    </Form.Group>
-                    <Form.Group as={Col} controlID="submitForm">
-                        <Button type="submit" variant="dark" className="mx-5">Submit</Button>
-                    </Form.Group>
-                    </Form.Row>
-                </Form>
+                <form>
+                    <div className="form-group">
+                        <label>Buyer's Name</label>
+                        <input type="text" className="form-control" name="buyername"  onChange={this.handleInputChange}/>    
+                    </div>
+                    <div className="form-group">
+                        <label>Book Name</label>
+                        <input type="text" className="form-control" name="bookname" onChange={this.handleInputChange}/>
+                    </div>
+                    <div className="form-group">
+                        <label>ISBN</label>
+                        <input type="text" className="form-control" name="isbn"  onChange={this.handleInputChange}/>    
+                    </div>
+                    <div className="form-group">
+                        <label>Qnt</label>
+                        <input type="numbers" className="form-control" name="quantity"  onChange={this.handleInputChange}/>    
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2 btn-dark">Submit</button>
+                </form>
             </Card>
         )
     }
